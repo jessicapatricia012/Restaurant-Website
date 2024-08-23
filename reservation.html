@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>[Name of] Restaurant</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/e616ec6e3d.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div id="tab">
+            <a href="index.html">
+                <i class="fa-solid fa-house fa-2xl" style="color: white;"></i>
+            </a>
+        
+            <a class="tabText" id="contactTab" href="index.html#bottomCont">Contact Us</a>
+            <a class="tabText" id="aboutTab" href="about.html">About Us</a>
+            <a class="tabText" id="menuTab" href="Menu.pdf" target="_blank">Menu</a>
+
+        </div>
+
+        <div id="reserveBox">
+            <h1> Make a Reservation</h1>
+            <p id="reservePar"> for a party of more than 6 people, please contact us directly</h2>
+
+            <div id="formsCont">
+                <form id="form1">
+                    
+                    <label for="name">Name: </label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" >
+                    
+                    <br><br>
+                    
+                    <label for="phone">Phone: </label>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="XXXXXXXXXX"  >
+                    
+                    <br><br>
+
+                    <label for="partySize">Party: </label>
+                    <input type="number" id="partySize" name="partySize" value="6" min="1" max="6" >
+                
+                    <br><br>
+                    
+                    <label for="date">Date: </label>
+                    <input type="date" id="date" name="date" onfocus ="this.min=new Date().toISOString().split('T')[0]" >
+                    
+                    <br><br>
+                    
+                    <label for="time">Time: </label>
+                    <input type="time" id="time" name="time" min="11:00" max="22:00" required>
+                    
+                    <br><br>
+                
+                    <input type="submit" name="submit" id="submit" value="Check available timeslots">
+                    <br><br>
+                    
+                    <span id="timeNotFound"></span>
+
+                </form>
+                <form id="form2" style="display: n;">
+
+                    <div id="optionOne" style="display: none">
+                        <input id="radioOne" type="radio" name="time" required >
+                        <label for="radioOne">  
+                            <span id="timeOne" > </span>
+                        </label>
+                    </div>
+
+                    <div id="optionTwo"  style="display: none">
+                        <input id="radioTwo" type="radio" name="time">
+                        <label for="radioTwo" > 
+                            <span id="timeTwo"> </span>
+                        </label>
+                    </div>
+
+                    <div id="optionThree"  style="display: none">
+                        <input id="radioThree" type="radio" name="time">
+                        <label for="radioThree"> 
+                            <span id="timeThree"> </span>
+                        </label>
+                    </div>
+
+                    <div id="optionFour" style="display: none">
+                        <input id="radioFour" type="radio" name="time">
+                        <label for="radioFour" > 
+                            <span id="timeFour"> </span>
+                        </label>
+                    </div>
+                    
+                    <div id="optionFive" style="display: none">
+                        <input id="radioFive" type="radio" name="time">
+                        <label for="radioFive"> 
+                            <span id="timeFive" for="radioFive"> </span>
+                        </label>
+                    </div>
+
+                    <br><br>
+
+                    <input type="submit" id="reserveTimeBtn" value="Reserve">
+
+                </form>
+
+                <br>
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+        
+    
+        
+
+        <script src="reservation.js"></script>
+    </body>
+</html>

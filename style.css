@@ -1,0 +1,193 @@
+body{
+    background-image: linear-gradient(to top, rgba(0,0,0,0.99), rgba(1,1,1,0)), url("/images/burger-with-melted-cheese.webp");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    
+    margin: 0px;
+    
+
+}
+
+h1{
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 55px;
+    text-align: center;
+    
+}
+
+    
+p{
+    color: white;
+    font-style: italic;
+    font-size:  20px;;
+    text-align: center;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+h2{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 100px;
+
+}
+
+#tab{
+    background-color: black;
+    height: 40px;
+    width: 100%;
+    opacity: 0.8;
+    position: fixed;
+    padding-top: 7px;
+
+}
+
+.tabText{
+    size: 15px;
+    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+}
+
+#menuTab{
+    float: right;
+    position: relative;
+    right: 60px;
+}
+
+
+#aboutTab{
+    float: right;
+    position: relative;
+    right: 40px;
+}
+
+
+#contactTab{
+    float: right;
+    position: relative;
+    right: 20px;
+}
+
+
+
+
+#hoursTable{
+    margin: auto;
+    margin-top: 10px;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+}
+
+th{
+    text-align: right;
+    padding-right: 15px;
+}
+
+#reserveBtn{
+    margin-top: 100px;
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+    font-size: 15px;
+    padding: 10px 50px 10px 50px;
+    text-align: center;
+    color: white;
+    background-color: transparent;
+
+}
+
+#reserveBtnCont{
+    text-align: center;
+
+}
+
+#bottomCont{
+    background-color: black;
+    width: 100%;
+    height: 750px;
+    text-align: center;
+    padding-top: 50px;
+
+}
+.bottomText{
+    color: white;
+    margin: 1px;
+}
+
+h3{
+    font-size: 35px;
+}
+
+h4{
+    font-size: 25px;
+    
+}
+
+h5{
+    font-size: 15px;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+
+.contacts{
+    margin: auto;
+    height:25px;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.contactIcon{
+    float: left;
+    position: relative;
+    top: 10px;
+    right: 5px;
+}
+ 
+.fa-house{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+
+#reserveBox{
+    background-color: black;
+    height: 90%;
+    width: 80%;
+    margin: auto;
+    position: absolute;
+    top:100px;
+    left: 0;
+    right: 0;
+
+}
+
+#reservePar{
+    position: relative;
+    bottom: 30px;
+
+}
+
+
+label{
+    color: white;
+}
+
+#timeNotFound{
+    color: white;
+}
+
+#formsCont{
+    margin-left: 70px;
+}
+
+
