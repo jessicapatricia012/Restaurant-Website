@@ -1,14 +1,12 @@
-function createTimeslot(){
-    const numTimeslot = 22 // 1 timeslot = 30 minutes, starts from 11am to 10pm
-    const timeslots = new Array(numTimeslot); 
-    for (let i=0; i<numTimeslot; i++) {
-        timeslots[i] = []; // array of dates reservation is made for that particular time slots
-    }
-    return timeslots;
-}
+var tableIndex;
+var timeIndex;
+var timeslotFound;
+let availableTimes = [];
+const numTimeslot = 22 // 1 timeslot = 30 minutes, starts from 11am to 10pm
+
+
 
 class Table{
-
     constructor(numSeats, timeslots){
         this.numSeats = numSeats;
         this.timeslots = timeslots;
@@ -19,12 +17,29 @@ class Table{
         this.timeslots[timeIndex + 1].push(date);
         this.timeslots[timeIndex + 2].push(date);
         this.timeslots[timeIndex + 3].push(date);
+
+        document.getElementById('reserveBox').style.display = "none";
+        document.getElementById('reservedBox').style.display = "block";
+
+        
+        localStorage.setItem("table " + tableIndex + ": " + timeIndex, JSON.stringify(this.timeslots[timeIndex]));
+        localStorage.setItem("table " + tableIndex + ": " + (timeIndex+1), JSON.stringify(this.timeslots[timeIndex+1]));
+        localStorage.setItem("table " + tableIndex + ": " + (timeIndex+2), JSON.stringify(this.timeslots[timeIndex+2]));
+        localStorage.setItem("table " + tableIndex + ": " + (timeIndex+3), JSON.stringify(this.timeslots[timeIndex+3]));
+        
+        localStorage.clear;
     }
-
-
 }
 
 
+function createTimeslot(){
+    
+    const timeslots = new Array(numTimeslot); 
+    for (let i=0; i<numTimeslot; i++) {
+        timeslots[i] = []; // array of dates reservation is made for that particular time slots
+    }
+    return timeslots;
+}
 
 const tables = [];
 let numTables = 12;
@@ -61,22 +76,13 @@ const optionFour = document.getElementById("optionFour");
 const optionFive = document.getElementById("optionFive");
 
 
-var tableIndex;
-var timeIndex;
-var timeslotFound;
-let availableTimes = [];
-
-
 
 form1.addEventListener(`submit`, (e)=>{
     e.preventDefault();
-    console.log("check button clicked")
-    availableTimes = [];
+
+    reset();
     
     timeIndex = getTimeIndex(time.value);
-    console.log("time index found:" + timeIndex);
-
-
     timeslotFound = false;
     tableIndex = searchTable(+(partySize.value)); 
 
@@ -84,21 +90,14 @@ form1.addEventListener(`submit`, (e)=>{
 })
 
 form2.addEventListener(`submit`, (e)=>{
-    console.log("reserve button clicked")
     e.preventDefault();
 
     let selectedTimeIndex = checkOptionSelected();
-    
 
-    console.log(tableIndex);
-    console.log(typeof(tables[tableIndex]));
-    tables[tableIndex].reserve(date, selectedTimeIndex);
+    tables[tableIndex].reserve(date.value, selectedTimeIndex);
 
-    console.log((tables[8].timeslots));
-    console.log((tables[9].timeslots));
-    console.log((tables[10].timeslots));
-    console.log(typeof(date.value));
 })
+
 
 
 function getTimeIndex(time){
@@ -107,24 +106,19 @@ function getTimeIndex(time){
     return Math.round(((+a[0]) * 60 + (+a[1])) * 2 / 60);
 }
 
-
-
 function searchTable(num){
-    if (num <= 2) {
+    if (num <= 2) 
         return 0;
-    } else if (num <= 4) {
+    else if (num <= 4) 
         return 4;
-    } else {
+    else 
         return 8;
-    }
 }
 
 function searchTimeslot(arr, date){
-    console.log(arr.length);
-    for (let a = 0; a < arr.length; a++){
+    for (let a = 0; a < arr.length; a++)
         if (arr[a] == date)
             return false;
-    }
     return true;
 }
 
@@ -132,65 +126,27 @@ function translateToTime(i){
     let hour = Math.floor(11 + i / 2); 
     let time = hour.toString();
 
-    if (i % 2 == 0){
+    if (i % 2 == 0)
         return time + ":00";
-    } else {
+    else 
         return time + ":30";
-    }
-
 }
 
 function displayTimeOptions(){
-    console.log("displaying time options");
     
-    
-    
-    //form2.style.display = `block`;
-    // let optionDisplayed = false;
-
     while (availableTimes.length == 0 && tableIndex < numTables){
         for (var i = -2; i <= 2; i++) {
             if ((timeIndex+i >= 0) && (timeIndex+i < 22)) {
-                //console.log(timeIndex);
-                //console.log(tableIndex);
-                timeslotFound = searchTimeslot(tables[tableIndex].timeslots[timeIndex+i], date);
+                timeslotFound = searchTimeslot(tables[tableIndex].timeslots[timeIndex+i], date.value);
                 if (timeslotFound) {
-                    //optionDisplayed = true;
                     availableTimes.push(timeIndex+i);
                     console.log("pushed");
-
-
-
-                    //console.log("time displayed, pls choose")
-                    // if (optionOne.style.display == `none`) {
-                    //     console.log("option 1");
-                    //     timeOne.innerHTML = translateToTime(timeIndex+i);
-                    //     optionOne.style.display = `block`;
-                    // } else if (optionTwo.style.display == `none`) {
-                    //     console.log("option 2");
-                    //     timeTwo.innerHTML = translateToTime(timeIndex+i);
-                    //     optionTwo.style.display = `block`;
-                    // } else if (optionThree.style.display == `none`) {
-                    //     console.log("option 3");
-                    //     timeThree.innerHTML = translateToTime(timeIndex+i);
-                    //     optionThree.style.display = `block`;
-                    // } else if (optionFour.style.display == `none`) { 
-                    //     console.log("option 4");                       
-                    //     timeFour.innerHTML = translateToTime(timeIndex+i);
-                    //     optionFour.style.display = `block`;
-                    // } else if (optionFive.style.display == `none`) {
-                    //     console.log("option 5");
-                    //     timeFive.innerHTML = translateToTime(timeIndex+i);
-                    //     optionFive.style.display = `block`;
-                    // }
                 }
             }
         }   
-        if(availableTimes.length==0) {
+        if(availableTimes.length == 0) 
             tableIndex++;
-        }
     }
-        
 
 
     if (availableTimes.length == 0) {
@@ -215,36 +171,34 @@ function displayTimeOptions(){
             timeFive.innerHTML = translateToTime(availableTimes[4]);
             optionFive.style.display = `block`;
         }
-        
-
+        document.getElementById("reserveTimeBtn").style.display = 'block';
     }
-        
-
-
-    
-    
-    // timeOne.innerHTML = translateToTime(timeIndex-2);
-    // timeTwo.innerHTML = translateToTime(timeIndex-1);
-    // timeThree.innerHTML = translateToTime(timeIndex);
-    // timeFour.innerHTML = translateToTime(timeIndex+1);
-    // timeFive.innerHTML = translateToTime(timeIndex+2);
-
-    
 }
 
 
 function reset(){
-    console.log("reset");
-    optionOne.style.display == `none`;
-    optionTwo.style.display == `none`;
-    optionThree.style.display == `none`;
-    optionFour.style.display == `none`;
-    optionFive.style.display == `none`;
+    availableTimes = [];
 
+    timeNotFound.innerHTML = "";
+    form2.style.display = `block`;
+
+    optionOne.style.display = `none`;
+    optionTwo.style.display = `none`;
+    optionThree.style.display = `none`;
+    optionFour.style.display = `none`;
+    optionFive.style.display = `none`;
+
+
+    for (var i = 0; i < numTables; i++) {
+        for (var j = 0; j < numTimeslot; j++) {
+            if (localStorage.getItem("table " + i + ": " + j) != null)
+            tables[i].timeslots[j] = JSON.parse(localStorage.getItem("table " + i + ": " + j));
+        }
+    }
 }
 
 function checkOptionSelected() {
-    console.log("cked fhdja");
+
     if (document.getElementById("radioOne").checked) 
         return availableTimes[0];
     else if (document.getElementById("radioTwo").checked) 
@@ -258,3 +212,4 @@ function checkOptionSelected() {
     else 
         return 0;
 }
+

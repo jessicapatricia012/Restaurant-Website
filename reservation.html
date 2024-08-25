@@ -17,7 +17,7 @@
 
         </div>
 
-        <div id="reserveBox">
+        <div id="reserveBox" class="box">
             <h1> Make a Reservation</h1>
             <p id="reservePar"> for a party of more than 6 people, please contact us directly</h2>
 
@@ -25,22 +25,22 @@
                 <form id="form1">
                     
                     <label for="name">Name: </label>
-                    <input type="text" id="name" name="name" placeholder="Your Name" >
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
                     
                     <br><br>
                     
                     <label for="phone">Phone: </label>
-                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="XXXXXXXXXX"  >
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="XXXXXXXXXX" required>
                     
                     <br><br>
 
                     <label for="partySize">Party: </label>
-                    <input type="number" id="partySize" name="partySize" value="6" min="1" max="6" >
+                    <input type="number" id="partySize" name="partySize" value="2" min="1" max="6">
                 
                     <br><br>
                     
                     <label for="date">Date: </label>
-                    <input type="date" id="date" name="date" onfocus ="this.min=new Date().toISOString().split('T')[0]" >
+                    <input type="date" id="date" name="date" onfocus ="this.min=new Date().toISOString().split('T')[0]" required>
                     
                     <br><br>
                     
@@ -92,9 +92,9 @@
                         </label>
                     </div>
 
-                    <br><br>
+                    <br>
 
-                    <input type="submit" id="reserveTimeBtn" value="Reserve">
+                    <input type="submit" id="reserveTimeBtn" value="Reserve" style="display: none;">
 
                 </form>
 
@@ -105,6 +105,11 @@
 
 
 
+        </div>
+
+        <div id="reservedBox" class="box" style="display: none">
+            <h1>Your Table is Reserved</h1>
+            <p>We're happy to see you soon!</p>
         </div>
 
 

@@ -159,7 +159,7 @@ a{
 }
 
 
-#reserveBox{
+.box{
     background-color: black;
     height: 90%;
     width: 80%;
