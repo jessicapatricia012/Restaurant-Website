@@ -4,6 +4,25 @@ var timeslotFound;
 let availableTimes = [];
 const numTimeslot = 22 // 1 timeslot = 30 minutes, starts from 11am to 10pm
 
+var custName = document.getElementById("name");
+var phone = document.getElementById("phone");
+var partySize = document.getElementById("partySize");
+var date = document.getElementById("date");
+var time = document.getElementById("time");
+var form1 = document.getElementById("form1");
+var form2 = document.getElementById("form2");
+var timeNotFound = document.getElementById("timeNotFound");
+var timeOne = document.getElementById("timeOne");
+var timeTwo = document.getElementById("timeTwo");
+var timeThree = document.getElementById("timeThree");
+var timeFour = document.getElementById("timeFour");
+var timeFive = document.getElementById("timeFive");
+var optionOne = document.getElementById("optionOne");
+var optionTwo = document.getElementById("optionTwo");
+var optionThree = document.getElementById("optionThree");
+var optionFour = document.getElementById("optionFour");
+var optionFive = document.getElementById("optionFive");
+
 
 
 class Table{
@@ -13,7 +32,7 @@ class Table{
     }
 
     reserve(date, timeIndex) { //reserve for 2 hours (4 time slots)
-        this.timeslots[timeIndex].push(date);
+        this.timeslots[timeIndex].push(date + " " + custName.value + " " + phone.value);
         this.timeslots[timeIndex + 1].push(date);
         this.timeslots[timeIndex + 2].push(date);
         this.timeslots[timeIndex + 3].push(date);
@@ -27,7 +46,7 @@ class Table{
         localStorage.setItem("table " + tableIndex + ": " + (timeIndex+2), JSON.stringify(this.timeslots[timeIndex+2]));
         localStorage.setItem("table " + tableIndex + ": " + (timeIndex+3), JSON.stringify(this.timeslots[timeIndex+3]));
         
-        localStorage.clear;
+        //localStorage.clear;
     }
 }
 
@@ -56,27 +75,6 @@ for (let i=8; i<numTables; i++) { //4 tables
 
 
 
-
-
-const partySize = document.getElementById("partySize");
-const date = document.getElementById("date");
-const time = document.getElementById("time");
-const form1 = document.getElementById("form1");
-const form2 = document.getElementById("form2");
-const timeNotFound = document.getElementById("timeNotFound");
-const timeOne = document.getElementById("timeOne");
-const timeTwo = document.getElementById("timeTwo");
-const timeThree = document.getElementById("timeThree");
-const timeFour = document.getElementById("timeFour");
-const timeFive = document.getElementById("timeFive");
-const optionOne = document.getElementById("optionOne");
-const optionTwo = document.getElementById("optionTwo");
-const optionThree = document.getElementById("optionThree");
-const optionFour = document.getElementById("optionFour");
-const optionFive = document.getElementById("optionFive");
-
-
-
 form1.addEventListener(`submit`, (e)=>{
     e.preventDefault();
 
@@ -95,6 +93,9 @@ form2.addEventListener(`submit`, (e)=>{
     let selectedTimeIndex = checkOptionSelected();
 
     tables[tableIndex].reserve(date.value, selectedTimeIndex);
+
+    console.log(tables[8].timeslots);
+    console.log(tables[9].timeslots);
 
 })
 
@@ -117,7 +118,7 @@ function searchTable(num){
 
 function searchTimeslot(arr, date){
     for (let a = 0; a < arr.length; a++)
-        if (arr[a] == date)
+        if (arr[a].substr(0,10) == date)
             return false;
     return true;
 }
