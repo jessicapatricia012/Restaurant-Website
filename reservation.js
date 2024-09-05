@@ -33,20 +33,25 @@ class Table{
 
     reserve(date, timeIndex) { //reserve for 2 hours (4 time slots)
         this.timeslots[timeIndex].push(date + " " + custName.value + " " + phone.value);
-        this.timeslots[timeIndex + 1].push(date);
-        this.timeslots[timeIndex + 2].push(date);
-        this.timeslots[timeIndex + 3].push(date);
-
-        document.getElementById('reserveBox').style.display = "none";
-        document.getElementById('reservedBox').style.display = "block";
-
+        for (var i = 1; i <= 3; i++){
+            if (timeIndex + i < numTimeslot)
+                this.timeslots[timeIndex + i].push(date);
+        }
+        
+        //document.getElementById('reserveBox').style.display = "none";
+        //document.getElementById('reservedBox').style.display = "block";
         
         localStorage.setItem("table " + tableIndex + ": " + timeIndex, JSON.stringify(this.timeslots[timeIndex]));
         localStorage.setItem("table " + tableIndex + ": " + (timeIndex+1), JSON.stringify(this.timeslots[timeIndex+1]));
         localStorage.setItem("table " + tableIndex + ": " + (timeIndex+2), JSON.stringify(this.timeslots[timeIndex+2]));
         localStorage.setItem("table " + tableIndex + ": " + (timeIndex+3), JSON.stringify(this.timeslots[timeIndex+3]));
+
         
-        //localStorage.clear;
+        for(var i=0; i<numTables;i++) 
+            console.log(tables[i].timeslots);
+        
+
+        window.localStorage.clear();
     }
 }
 
@@ -93,10 +98,7 @@ form2.addEventListener(`submit`, (e)=>{
     let selectedTimeIndex = checkOptionSelected();
 
     tables[tableIndex].reserve(date.value, selectedTimeIndex);
-
-    console.log(tables[8].timeslots);
-    console.log(tables[9].timeslots);
-
+    
 })
 
 
@@ -141,7 +143,6 @@ function displayTimeOptions(){
                 timeslotFound = searchTimeslot(tables[tableIndex].timeslots[timeIndex+i], date.value);
                 if (timeslotFound) {
                     availableTimes.push(timeIndex+i);
-                    console.log("pushed");
                 }
             }
         }   

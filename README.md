@@ -2,6 +2,7 @@
 
 I am designing a restaurant website that allow user to navigate through several web pages, access links, and make a reservation system.
 
+
 ## About the reservation system
 - There is a total of 12 tables: 4 2-seater, 4 4-seater, and 4 6-seater
 - The form will required a name, phone number, number of guests, date, and time of arrival
