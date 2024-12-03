@@ -1,6 +1,6 @@
 # Restaurant Website
 
-I am designing a restaurant website that allow user to navigate through several web pages, access links, and make a reservation system.
+I am designing a restaurant website that allow user to navigate through several web pages, access links, and make a reservation.
 
 
 ## About the reservation system
